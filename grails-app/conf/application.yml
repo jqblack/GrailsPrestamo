@@ -100,15 +100,15 @@ hibernate:
 dataSource:
     pooled: true
     jmxExport: true
-    driverClassName: org.h2.Driver
-    username: sa
-    password: ''
+    driverClassName: org.postgresql.Driver
+    username: postgres
+    password: desarrollo
 
 environments:
     development:
         dataSource:
-            dbCreate: create-drop
-            url: jdbc:h2:mem:devDb;MVCC=TRUE;LOCK_TIMEOUT=10000;DB_CLOSE_ON_EXIT=FALSE
+            dbCreate: none
+            url: jdbc:postgresql://localhost:5432/db_pagweb
     test:
         dataSource:
             dbCreate: update
@@ -116,7 +116,9 @@ environments:
     production:
         dataSource:
             dbCreate: none
-            url: jdbc:h2:./prodDb;MVCC=TRUE;LOCK_TIMEOUT=10000;DB_CLOSE_ON_EXIT=FALSE
+            username: postgres
+            password: desarrollo
+            url: jdbc:postgresql://localhost:5432/db_pagweb
             properties:
                 jmxEnabled: true
                 initialSize: 5

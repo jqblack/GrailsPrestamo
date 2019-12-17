@@ -11,7 +11,7 @@
 
 <body>
 
-<form id="frm">
+<form id="frm" method="post">
 
     <div class="row">
 
@@ -63,11 +63,57 @@
     <div class="float-right">
 
         <button type="submit" class="btn btn-primary">Agregar</button>
-        <button type="submit" class="btn btn-outline-danger">Cancelar</button>
+        <button type="button" class="btn btn-outline-danger">Cancelar</button>
 
 
     </div>
 </form>
 
+<br><br><br><br>
+<h3>Lista de Clientes</h3>
+<table class="table">
+    <thead class="thead-dark">
+    <tr>
+        <th scope="col">Cédula</th>
+        <th scope="col">Nombre</th>
+        <th scope="col">Dirección</th>
+        <th scope="col">Celular</th>
+        <th scope="col">Acción</th>
+    </tr>
+    </thead>
+    <tbody id="tablacliente">
+
+    <g:each in="${tclienteList}">
+
+        <tr>
+            <th scope="row">${it.fCedula}</th>
+            <td>${it.fNombre}&nbsp;${it.fApellidos}</td>
+            <td>${it.fDireccion}</td>
+            <td>${it.fCelular}</td>
+            <td>
+                <div class="dropdown">
+                    <button class="btn btn-success dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                        Acción
+                    </button>
+                    <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+                        <a onclick="editar('${it.id}')" class="dropdown-item" style="cursor: pointer;"><span
+                                class=" fa fa-pencil"></span> Editar</a>
+                        <a class="dropdown-item" style="cursor: pointer;">
+                            <span class="fa fa-trash"></span> Eliminar</a>
+                    </div>
+                </div>
+            </td>
+        </tr>
+
+    </g:each>
+
+    </tbody>
+</table>
+
+<br><br><br><br><br><br><br>
+
+
+
+<asset:javascript src="registroclientes.js"/>
 </body>
 </html>

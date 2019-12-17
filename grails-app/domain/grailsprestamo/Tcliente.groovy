@@ -26,13 +26,13 @@ class Tcliente {
     Boolean fVisible
 
     static constraints = {
-        fNombre(size: 0..30)
-        fApellidos(size: 0..50)
-        fCedula(size: 0..20)
-        fEmail(size: 0..30)
-        fDireccion()
-        fCelular(size: 0..20)
-        fTelefono(size: 0..20)
+        fNombre(size: 0..30,nullable: true)
+        fApellidos(size: 0..50,nullable: true)
+        fCedula(size: 0..20,nullable: true)
+        fEmail(size: 0..30,nullable: true)
+        fDireccion(nullable: true)
+        fCelular(size: 0..20,nullable: true)
+        fTelefono(size: 0..20,nullable: true)
         fVisible(nullable: true)
     }
 
