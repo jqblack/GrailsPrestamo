@@ -105,7 +105,7 @@
 
             <div class="form-group">
                 <label>Fecha</label>
-                <input type="date" class="form-control" id="tfecha" name="tfecha">
+                <input type="date"  class="form-control" id="tfecha" name="tfecha">
             </div>
 
         </div>
@@ -123,7 +123,7 @@
 
 
 <div class="modal fade" tabindex="-1" role="dialog" id="modalBuscarCodeudor">
-    <div class="modal-dialog" role="document">
+    <div class="modal-dialog modal-lg" role="document">
         <div class="modal-content">
             <div class="modal-header">
                 <h5 class="modal-title">Buscar</h5>
@@ -153,11 +153,28 @@
 
                     </div>
                 </form>
+                <br><br><br>
+                <table class="table" style="display: none" id="tablacodeudor">
+                    <thead class="thead-dark">
+                    <tr>
+                        <th scope="col">Cédula</th>
+                        <th scope="col">Nombre</th>
+                        <th scope="col">Dirección</th>
+                        <th scope="col">Celular</th>
+                        <th scope="col">Acción</th>
+                    </tr>
+                    </thead>
+
+                    <tbody id="bodycodeudor">
+
+                    </tbody>
+
+                </table>
 
             </div>
             <div class="modal-footer">
                 <button type="button" class="btn btn-outline-danger" onclick="limpiarModal()" data-dismiss="modal">Cerrar</button>
-                <button type="button" class="btn btn-success">Buscar</button>
+                <button type="button" class="btn btn-success" onclick="cosummit()">Buscar</button>
             </div>
         </div>
     </div>
@@ -228,7 +245,7 @@
 
 <br><br><br><br>
 
-<table class="table" style="display: none">
+<table class="table" id="tablaprestamo" style="display: none">
     <thead class="thead-dark">
     <tr>
         <th scope="col">#</th>
@@ -238,7 +255,7 @@
         <th scope="col">Monto Interes</th>
     </tr>
     </thead>
-    <tbody id="tablaprestamo">
+    <tbody id="bodyprestamo">
 
     </tbody>
 </table>

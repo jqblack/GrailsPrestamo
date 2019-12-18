@@ -33,7 +33,6 @@ class UrlMappings {
 
         //PRESTAMOS
 
-
         "/prestamo"(controller: "prestamo"){
             action =[GET : "prestamo"]
         }
@@ -44,6 +43,18 @@ class UrlMappings {
 
         "/prestamo/BuscarClientebyid"(controller: "prestamo"){
             action =[POST : "BuscarClientebyid"]
+        }
+
+        "/prestamo/buscarcodeudor"(controller: "prestamo"){
+            action =[POST : "buscarcodeudor"]
+        }
+
+        "/prestamo/BuscarCodeudorbyid"(controller: "prestamo"){
+            action =[POST : "BuscarClientebyid"]
+        }
+
+        "/prestamo/generarTablaprestamo"(controller: "prestamo"){
+            action =[POST : "generarTablaprestamo"]
         }
     }
 }

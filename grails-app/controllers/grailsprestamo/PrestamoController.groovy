@@ -28,4 +28,27 @@ class PrestamoController {
         Tcliente tcliente = prestamoService.BuscarClientebyid(params.idrecord as Long);
         render tcliente as JSON;
     }
+
+    def buscarcodeudor(){
+        List list = prestamoService.buscarcliente(
+                params.bcedula as String,
+                params.bnombre as String
+        );
+
+        render JsonOutput.toJson(list);
+    }
+
+    def generarTablaprestamo(){
+
+        List list = prestamoService.generarTablaprestamo(
+                new Date(params.tfecha as String) ,
+                params.tmonto as BigDecimal,
+                params.ttasa as BigDecimal,
+                params.tcantidad as Long,
+                params.tperiodo as Long,
+                params.ttipo as Long
+        );
+
+        render JsonOutput.toJson(list);
+    }
 }
