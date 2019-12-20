@@ -1,5 +1,7 @@
 var idcliente = 0;
 var idcodeudor = 0;
+var lista_cuotas;
+var miparams = {};
 
 function limpiarModal() {
     $("#bcedula").val("");
@@ -163,6 +165,9 @@ function SeleccionarCliente(idcli) {
 
 function LimpiarForm() {
     $("#frm").trigger('reset');
+    idcliente = 0;
+    idcodeudor = 0;
+    $("#tablaprestamo").hide();
 }
 
 $("#frm").submit(function (e) {
@@ -222,10 +227,12 @@ function realizarPrestamo(params) {
         success: function (response) {
             var json = JSON.parse(response);
 
-            console.log(json);
-
             if (json.length > 0){
                 $("#tablaprestamo").show();
+
+                lista_cuotas = response;
+                miparams = params;
+                miparams.f_tabla_cuotas = lista_cuotas;
 
                 var html = "";
 
@@ -241,6 +248,41 @@ function realizarPrestamo(params) {
                 }
 
                 $("#bodyprestamo").html(html);
+            }
+        }
+    });
+}
+
+function generarprestamo() {
+    if (lista_cuotas.length <= 0){
+        show_no("Error","Ups primero tiene que generar la tabla de cuotas");
+        return;
+    }
+
+    if (!validarForm(miparams)){
+        console.log("Black Star men :p");
+        return;
+    }
+
+    miparams.f_idcliente = idcliente;
+    miparams.f_id_codeudor = idcodeudor;
+
+    $.ajax({
+        url: window.location+"/realizarprestamo",
+        data: miparams,
+        type: 'POST',
+        success: function (response) {
+            var json = JSON.parse(response);
+
+            if (json.key){
+                show_yes("Correcto",json.msj);
+                idcliente = 0;
+                idcodeudor = 0;
+                LimpiarForm();
+                $("#tablaprestamo").hide();
+            }
+            else{
+                show_no("Error",json.msj);
             }
         }
     });

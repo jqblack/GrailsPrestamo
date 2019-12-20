@@ -13,7 +13,8 @@ class SqlService {
 
     static transactional = true;
     def dataSource = Holders.getGrailsApplication().mainContext.getBean("dataSource")
-    def jdbcTemplate
+//    def jdbcTemplate
+    JdbcTemplate jdbcTemplate;
 
     def Date GetNow() {
         def template = new JdbcTemplate(dataSource);
@@ -31,10 +32,10 @@ class SqlService {
         }
     }
 
-    Map<String,Object> GetQueryMap(String sql, Object[] collection){
+    Map<String,Object> GetQueryMap(String sql, Collection collection){
         try {
             def template = new JdbcTemplate(dataSource);
-            return template.queryForMap(sql,collection);
+            return jdbcTemplate.queryForMap(sql,collection.toArray());
         } catch (Exception e) {
 //            e.printStackTrace();
             return [:]
@@ -67,7 +68,7 @@ class SqlService {
 
     def EjecutarSql(String sql, Collection collection) {
         def template = new JdbcTemplate(dataSource);
-        template.execute(sql, collection.toArray());
+        jdbcTemplate.update(sql,collection.toArray())
     }
 
     def List<Map<String, Object>> GetQueryListOfMap(String sql, Collection collection) {

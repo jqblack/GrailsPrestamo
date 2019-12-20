@@ -1,13 +1,16 @@
 package grailsprestamo
 
+import Funciones.Funciones
 import grails.converters.JSON
 import groovy.json.JsonOutput
 
 class PrestamoController {
 
     def index() { }
+    private static List lista_cuo;
 
     PrestamoService prestamoService;
+    Funciones funciones = new Funciones();
 
     def prestamo(){
         Map mapa = prestamoService.GetCombos();
@@ -49,6 +52,31 @@ class PrestamoController {
                 params.ttipo as Long
         );
 
+        lista_cuo = list;
+
         render JsonOutput.toJson(list);
+    }
+    
+    def realizarprestamo(){
+
+        Map mapa = prestamoService.salvarPrestamos(
+                params.f_idcliente as Long,
+                params.f_id_codeudor as Long,
+                funciones.NormalFormat(params.tmonto),
+                funciones.NormalFormat(params.ttasa),
+                params.ttipo as Long,
+                params.tperiodo as Long,
+                params.tmoneda as Long,
+                funciones.NormalFormat(params.tmora),
+                params.tcantidad as Long,
+                funciones.NormalFormat(params.tmontoc),
+                new Date((params.tfecha as String).replace("-","/")),
+                lista_cuo
+
+        );
+        if(mapa.get("key")){
+            lista_cuo = [];
+        }
+        render JsonOutput.toJson(mapa);
     }
 }

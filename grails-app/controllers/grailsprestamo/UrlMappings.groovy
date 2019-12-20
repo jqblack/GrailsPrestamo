@@ -56,5 +56,9 @@ class UrlMappings {
         "/prestamo/generarTablaprestamo"(controller: "prestamo"){
             action =[POST : "generarTablaprestamo"]
         }
+
+        "/prestamo/realizarprestamo"(controller: "prestamo"){
+            action =[POST : "realizarprestamo"]
+        }
     }
 }

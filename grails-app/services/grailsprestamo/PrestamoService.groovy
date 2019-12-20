@@ -2,6 +2,7 @@ package grailsprestamo
 
 import Funciones.Funciones
 import grails.gorm.transactions.Transactional
+import org.apache.tools.ant.taskdefs.ExecTask
 
 import java.text.SimpleDateFormat
 
@@ -102,6 +103,63 @@ class PrestamoService {
 
         return lista_cuotas;
 
+    }
+
+    def salvarPrestamos(Long idcliente,Long idco_deudor,BigDecimal monto, BigDecimal tasa, Long tipo, Long periodo,
+                        Long moneda, BigDecimal mora, Long cantidad_pagos, BigDecimal monto_cuotas,
+                        Date fecha, List<Map<String, Object>> tabla_cuotas){
+
+        try{
+
+        Tprestamos tprestamos = new Tprestamos(
+                fBalance:monto,
+                fFechaPrestamo: fecha,
+                fCantidadPagos: cantidad_pagos,
+                fIdCliente: idcliente,
+                fIdCodeudor: idco_deudor,
+                fMoneda: moneda,
+                fMontoCuota: monto_cuotas,
+                fMontoPrestamo: monto,
+                fPagado: false,
+                fPeriodoPago: periodo,
+                fProcentajeMora: mora,
+                fTasaPrestamo: tasa,
+                fTipoPrestamo: tipo
+        );
+
+        tprestamos.save(failOnError: true);
+
+
+            BigDecimal interes_global = 0;
+            tabla_cuotas.each { cuota ->
+
+                BigDecimal monto_capital = funciones.NormalFormat(cuota.f_capital as String)
+                Date vencimiento = new Date(cuota.f_fecha_prestamo as String);
+                BigDecimal monto_cuota = funciones.NormalFormat(cuota.f_monto as String);
+                BigDecimal monto_interes = funciones.NormalFormat(cuota.f_interes as String)
+
+                interes_global += monto_interes;
+
+
+                TprestamosCuotas tprestamosCuotas = new TprestamosCuotas(
+                        fIdPrestamo: tprestamos.id,
+                        fFechaVencimiento: vencimiento,
+                        fMontoCapital: monto_capital,
+                        fMontoInteres: monto_interes,
+                        fMontoMora: 0,
+                        fPagada: false
+                );
+
+                tprestamosCuotas.save(failOnError: true);
+
+            }
+
+            return funciones.getRespuesta(true,"Prestamo realizado correctamente");
+
+        }catch(Exception e){
+            e.printStackTrace();
+            return funciones.getRespuesta(false,"Error al registrar el prestamo");
+        }
     }
 
 }

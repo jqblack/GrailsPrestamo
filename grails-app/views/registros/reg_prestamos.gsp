@@ -117,7 +117,6 @@
         <button type="submit" class="btn btn-primary">Generar</button>
         <button type="button" class="btn btn-outline-danger" onclick="LimpiarForm()">Limpiar</button>
 
-
     </div>
 </form>
 
@@ -245,20 +244,30 @@
 
 <br><br><br><br>
 
-<table class="table" id="tablaprestamo" style="display: none">
-    <thead class="thead-dark">
-    <tr>
-        <th scope="col">#</th>
-        <th scope="col">Fecha</th>
-        <th scope="col">Monto Cuota</th>
-        <th scope="col">Monto Capital</th>
-        <th scope="col">Monto Interes</th>
-    </tr>
-    </thead>
-    <tbody id="bodyprestamo">
+<div id="tablaprestamo" style="display: none">
+    <table class="table" >
+        <thead class="thead-dark">
+        <tr>
+            <th scope="col">#</th>
+            <th scope="col">Fecha</th>
+            <th scope="col">Monto Cuota</th>
+            <th scope="col">Monto Capital</th>
+            <th scope="col">Monto Interes</th>
+        </tr>
+        </thead>
+        <tbody id="bodyprestamo">
 
-    </tbody>
-</table>
+        </tbody>
+    </table>
+
+    <br><br><br>
+
+    <div class="float-right">
+        <button type="button" class="btn btn-outline-danger" onclick="LimpiarForm();" data-dismiss="modal">Cerrar</button>
+        <button type="button" onclick="generarprestamo()" class="btn btn-info">Generar Prestamo</button>
+    </div>
+</div>
+
 
 <br><br><br><br><br><br><br>
 
