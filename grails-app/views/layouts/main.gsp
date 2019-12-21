@@ -4,8 +4,8 @@
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
     <meta http-equiv="X-UA-Compatible" content="IE=edge"/>
     <title>
-        %{--<g:layoutTitle default="Grails"/>--}%
-        BLACK STAR
+        <g:layoutTitle default="Grails"/>
+        %{--BLACK STAR--}%
     </title>
     <meta name="viewport" content="width=device-width, initial-scale=1"/>
     <asset:link rel="icon" href="favicon.ico" type="image/x-ico"/>
@@ -56,6 +56,7 @@
                 </a>
                 <div class="dropdown-menu " aria-labelledby="navbarDropdown">
                     <a class="dropdown-item" href="./registroclientes">Registros de Clientes</a>
+                    <div class="dropdown-divider"></div>
                     <a class="dropdown-item" href="./prestamo">Registrar un préstamo</a>
                     <div class="dropdown-divider"></div>
                     <a class="dropdown-item" href="#">Something else here</a>

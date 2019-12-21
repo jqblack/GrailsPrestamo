@@ -46,7 +46,8 @@ function Salvar(params) {
             if (json.key){
                 show_yes("Correcto",json.msj);
                 idrecordmod = 0;
-                ActualizarTabla();
+                window.location.reload();
+                // ActualizarTabla();
             }
             else{
                 show_no("Error",json.msj);
@@ -80,12 +81,11 @@ function editar(idrecord) {
 
 function ActualizarTabla() {
     $.ajax({
+        data: [],
         url: window.location+"/actualizartabla",
-        data: {data:"hola"},
         type: 'POST',
         success: function (response) {
             var json = eval(response);
-
             var html = "";
 
             for (var i = 0; i < json.length; i++) {
